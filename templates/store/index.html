@@ -1,0 +1,215 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+    <section class="slider-section">
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" id="slide">
+                <div class="carousel-item active">
+                    <img src="{% static 'media/banner/banner1.jpeg' %}" class="d-block w-100" alt="..."
+                        data-bs-interval="3000">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'media/banner/banner2.jpeg' %}" class="d-block w-100" alt="..."
+                        data-bs-interval="3000">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'media/banner/banner3.jpeg' %}" class="d-block w-100" alt="..."
+                        data-bs-interval="3000">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <section class="middle">
+        <div class="container">
+            <h1 class="title">Why Choose Nirvana Technology?</h1>
+            <p class="subtitle">We deliver comprehensive security solutions with unmatched expertise and support</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h2 class="card-title">Unmatched Quality & Reliability</h2>
+                    <p class="card-text">Enterprise-grade security solutions with 99.9% uptime guarantee</p>
+                    <span class="card-tag">99.9% Uptime</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h2 class="card-title">Latest Technology Products</h2>
+                    <p class="card-text">Cutting-edge AI-powered surveillance and access control systems</p>
+                    <span class="card-tag">AI Powered</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h2 class="card-title">Exceptional Customer Service</h2>
+                    <p class="card-text">24/7 technical support with rapid response times</p>
+                    <span class="card-tag">24/7 Support</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h2 class="card-title">Competitive Pricing with Quality</h2>
+                    <p class="card-text">Best value solutions without compromising on quality</p>
+                    <span class="card-tag">Best Value</span>
+                </div>
+            </div>
+            <a href="#" class="cta-button">Get Started Today →</a>
+        </div>
+
+
+    </section>
+    <section class="featured-products">
+        <div class="container">
+            <div class="featured-header">
+                <div class="header-content">
+                    <h1>Featured Products</h1>
+                    <p>Discover our most popular security solutions</p>
+                </div>
+                <a href="{% url 'store:products' %}"><button class="view-all-btn">VIEW ALL →</button></a>
+            </div>
+
+            <div class="products-grid-index" style="">
+
+                {% for p in products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <a href="" class="d-block">
+                            <img src="{{p.image.url}}" class="card-img-top rounded-3" alt="{{p.name}}"
+                                style=" width: 100% ;height:100%; object-fit: contain;">
+                        </a>
+                        <div class="view-icon">👁</div>
+                        <div class="brand-badge">FTI</div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">{{ p.category.title }}</p>
+                        <h3 class="product-title">{{p.name}}</h3>
+                        <p class="product-model">{{ p.model_num }}</p>
+                        <p class="product-descritpion">{{ p.description|safe|truncatechars:20 }}</p>
+                        <br>
+
+                    <a href="{% url 'store:product_detail' p.slug %}" class="learn-more-btn">LEARN MORE →</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+    <section class="testimonial-section">
+        <div class="testimonials-section">
+            <div class="section-header">
+                <h1 class="section-title">What our clients think about us?</h1>
+                <p class="section-subtitle">Real feedback from our valued customers</p>
+            </div>
+
+            <div class="testimonials-grid">
+                {% for tes in testimonial %}
+                <div class="testimonial-card">
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <div class="avatar-icon">
+                                <div class="avatar-person"></div>
+                            </div>
+                        </div>
+                        <div class="client-details">
+                            <h3>{{tes.name}}</h3>
+                            <p class="client-company">{{tes.company}}</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                    </div>
+                    <p class="testimonial-text">{{tes.message}}</p>
+                </div>
+                {% endfor %}
+
+                
+            </div>
+        </div>
+
+    </section>
+    <section>
+        <div class="brands-section">
+            <div class="section-header">
+                <h1 class="section-title">Associated Brands</h1>
+                <p class="section-subtitle">Trusted partnerships with industry leaders</p>
+            </div>
+
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <div class="brand-logo subisu">SUBiSU</div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo deltatech">DeltaTech</div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo hikvision">HIKVISION</div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="altitude-air">
+                        <div class="logo-graphic">
+                            <div class="triangle-red"></div>
+                            <div class="triangle-blue"></div>
+                        </div>
+                        <div class="brand-name">ALTITUDE AIR</div>
+                    </div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="vianet">
+                        <div class="brand-name">vianet</div>
+                        <div class="tagline">connected</div>
+                    </div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="mercantile">
+                        <div class="brand-name">Mercantile</div>
+                        <div class="tagline">COMMUNICATIONS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<style>
+  
+  
+</style>
+{% endblock content %}

@@ -1,0 +1,259 @@
+{% extends 'partials/base.html' %} 
+{% load static %}
+{% block content %}
+<div class="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen flex items-center justify-center p-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                <div class="registration-card p-4 p-md-5 mx-auto">
+                    <h2 class="text-center">Join Our Community</h2>
+ {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            <p class="text-danger mb-0">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{form.non_field_errors }}
+                            <label for="username" class="form-label">Full Name</label>
+                            {{form.full_name}}
+                             {% if form.full_name.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.full_name.errors|join:", " }}
+                </div>
+            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            {{form.email}}
+                             {% if form.email.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.email.errors|join:", " }}
+                </div>
+            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password1" class="form-label">Password</label>
+                            {{form.password1}}
+                             {% if form.password1.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.password1.errors|join:", " }}
+                </div>
+            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password2" class="form-label ">Confirm Password</label>
+                            {{form.password2}}
+                             {% if form.password2.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.password2.errors|join:", " }}
+                </div>
+            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="mobile" class="form-label">Mobile Number</label>
+                            {{form.mobile}}
+                                {% if form.mobile.errors %}
+                <div class="text-danger small mt-1">
+                    {{ form.mobile.errors|join:", " }}
+                </div>
+            {% endif %}
+                        </div>
+
+                        
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Register Account
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                    </div>
+
+
+                    <p class="text-center text-muted mb-0">
+                        Already have an account?
+                        <a href="{% url 'userauths:login'%}" class="login-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Body and container styles */
+
+/* Container for centering content */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 7rem;
+}
+
+/* Registration card styling */
+.registration-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+  text-align: left;
+}
+
+/* Heading styles */
+h2.text-center {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+/* Form label styles */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Input field styles */
+input.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #1f2937;
+  background: #f9fafb;
+  outline: none;
+}
+
+input.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Error message styles */
+.text-danger {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.alert.alert-danger {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(90deg, #3b82f6, #7c3aed);
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2563eb, #6d28d9);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Divider styles */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+/* Text and link styles */
+.text-muted {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.login-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Animation for card entrance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .registration-card {
+    padding: 1.5rem;
+  }
+
+  h2.text-center {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary {
+    padding: 0.65rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .registration-card {
+    padding: 1rem;
+  }
+}
+</style>
+{% endblock content %}

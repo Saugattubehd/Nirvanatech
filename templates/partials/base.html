@@ -1,0 +1,103 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvana-Demo</title>
+    <link rel="stylesheet" href="{% static 'style/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+        
+</head>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/function.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+
+<!-- Header -->
+     <header class="header">
+        <nav class="nav-container">
+            <a href="{% url 'store:index' %}" class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <h1>NIRVANA</h1>
+                    <p>TECHNOLOGY</p>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+               <li><a href="{% url 'store:index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">HOME</a></li>
+    <li><a href="{% url 'store:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">ABOUT US</a></li>
+    <li><a href="{% url 'store:ourteam' %}" class="{% if request.resolver_match.url_name == 'ourteam' %}active{% endif %}">OUR TEAM</a></li>
+    <li><a href="{% url 'store:products' %}" class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">PRODUCTS</a></li>
+    <li><a href="{% url 'store:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">CONTACT US</a></li>
+            </ul>
+            {% if request.user.is_authenticated %}
+            
+            <a href="{% url 'userauths:logout' %}" class="login-btn">Logout</a>
+            {% else %}
+            <a href="{% url 'userauths:login' %}" class="login-btn">Login</a>
+             <a href="{% url 'userauths:register' %}" class="login-btn">Sign Up</a>
+            {% endif %}
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+    
+<!-- Header Ends here -->
+{% block content %}
+{% endblock content %}
+<!-- <script src="{% static 'js/index.js' %}"></script> -->
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <div class="logo-icon"></div>
+                    <div class="footer-logo-text">NIRVANA<br>Technology</div>
+                </div>
+                <div class="footer-description">
+                    Your trusted partner for security solutions and fire safety equipment.
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section quick-menu">
+                <h3>QUICK MENU</h3>
+                <ul>
+                    <li><a href="{% url 'store:index' %}">Home</a></li>
+                    <li><a href="{% url 'store:about' %}">About us</a></li>
+                    <li><a href="{% url 'store:products' %}">Products</a></li>
+                    <li><a href="{% url 'store:ourteam' %}">Our Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>CONTACT INFO</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> nirvanaitinternational@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +977 9701087385</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Indrayani Road, Lalitpur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Nirvana I.T. International. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>

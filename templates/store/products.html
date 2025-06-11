@@ -1,0 +1,86 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Products Header -->
+<div class="products-header">
+    <h1>Our Products</h1>
+</div>
+
+<div class="products-wrapper">
+    <!-- Sidebar -->
+    <div class="col-2 sidebar">
+        <h2>Filter by Category</h2>
+        <ul class="category-list">
+            <li class="category-item active" data-category="all">All Categories</li>
+            {% for c in categories %}
+            <li class="category-item" data-category="{{ c.title }}">{{ c.title }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    <!-- Products Grid -->
+    <div class="col-10 products-container">
+        <div class="products-grid">
+            {% for p in products %}
+            <div class="product-card" data-category="{{ p.category.title }}">
+                <div class="product-image">
+                    <a href="" class="d-block">
+                        <img src="{{p.image.url}}" class="card-img-top rounded-3" alt="{{p.name}}"
+                            style=" width: 100% ;height:100%; object-fit: contain;">
+                    </a>
+                    <div class="view-icon">👁</div>
+                    <div class="brand-badge">FTI</div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">{{ p.category.title }}</p>
+                    <h3 class="product-title">{{p.name}}</h3>
+                    <p class="product-model">{{ p.model_num }}</p>
+                    <p class="product-descritpion">{{ p.description|safe|truncatechars:20 }}</p>
+                    <br>
+
+                    <a href="{% url 'store:product_detail' p.slug %}" class="learn-more-btn">LEARN MORE →</a>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+
+            <!-- Repeat for other products -->
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const categoryItems = document.querySelectorAll('.category-item');
+        const productCards = document.querySelectorAll('.product-card');
+
+        categoryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all category items
+                categoryItems.forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                item.classList.add('active');
+
+                const selectedCategory = item.getAttribute('data-category');
+
+                // Filter products
+                productCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+<style>
+
+</style>
+{% endblock content %}
